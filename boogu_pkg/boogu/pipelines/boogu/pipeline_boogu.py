@@ -3134,8 +3134,8 @@ class BooguImagePipeline(DiffusionPipeline, BooguImageLoraLoaderMixin):
         # Match the original behavior: decide whether to transpose based on H/W
         H, W = G3.shape[-2], G3.shape[-1]
 
-        # Compute in bfloat16 (keeps the original logic)
-        X = G3.to(torch.bfloat16)
+        # Compute in compute dtype (bfloat16 on CUDA, float16 on MPS)
+        X = G3.to(G.dtype)
 
         # Normalize each matrix by its Frobenius norm: X /= (||X||_F + eps)
         # Frobenius norm = sqrt(sum_ij X^2)
