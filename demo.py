@@ -75,6 +75,7 @@ def main():
         else:
             print(f"    WARNING: {name} not found in checkpoint")
     del state_dict
+    transformer = transformer.to(dtype)
     print("    Transformer loaded")
 
     print("  Loading VAE...")
@@ -82,14 +83,14 @@ def main():
         os.path.join(model_path, "vae"),
         torch_dtype=dtype,
     )
+    vae = vae.to(dtype)
 
     print("  Loading MLLM (Qwen3-VL)...")
     mllm = Qwen3VLForConditionalGeneration.from_pretrained(
         os.path.join(model_path, "mllm"),
         torch_dtype=dtype,
     )
-    if device == "mps":
-        mllm = mllm.to(dtype=torch.float16)
+    mllm = mllm.to(dtype)
 
     print("  Loading processor...")
     processor = Qwen3VLProcessor.from_pretrained(
