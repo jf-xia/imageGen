@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "boogu-image"
+version = "0.1.0"
+description = "Inference code for Boogu-Image-0.1"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "torch>=2.7.1",
+    "torchvision>=0.22.1",
+    "diffusers>=0.35.2,<0.39",
+    "transformers>=4.57.3,<6",
+    "accelerate>=1.0",
+    "einops>=0.7",
+    "numpy>=1.26",
+    "pillow>=10",
+    "scipy>=1.11",
+]
+
+[tool.setuptools.packages.find]
+include = ["boogu*"]

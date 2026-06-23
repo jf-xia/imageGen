@@ -1,0 +1,14 @@
+Metadata-Version: 2.4
+Name: boogu-image
+Version: 0.1.0
+Summary: Inference code for Boogu-Image-0.1
+Requires-Python: <3.13,>=3.10
+Requires-Dist: torch>=2.7.1
+Requires-Dist: torchvision>=0.22.1
+Requires-Dist: diffusers<0.39,>=0.35.2
+Requires-Dist: transformers<6,>=4.57.3
+Requires-Dist: accelerate>=1.0
+Requires-Dist: einops>=0.7
+Requires-Dist: numpy>=1.26
+Requires-Dist: pillow>=10
+Requires-Dist: scipy>=1.11
