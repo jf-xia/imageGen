@@ -1,2 +1,6 @@
 .venv
-models
+/models/
+*.pyc
+__pycache__/
+*.egg-info/
+test_*.png

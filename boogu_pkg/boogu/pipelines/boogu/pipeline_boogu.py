@@ -2851,6 +2851,15 @@ class BooguImagePipeline(DiffusionPipeline, BooguImageLoraLoaderMixin):
             )
 
         # Put ref_latents here before encoding instruction.
+        # MPS does not support bfloat16 matmul; force float16 for MPS devices
+        if self.user_set_pipe_device and str(self.user_set_pipe_device).startswith("mps"):
+            if instruction_embeds.dtype == torch.bfloat16:
+                instruction_embeds = instruction_embeds.to(torch.float16)
+            if negative_instruction_embeds is not None and negative_instruction_embeds.dtype == torch.bfloat16:
+                negative_instruction_embeds = negative_instruction_embeds.to(torch.float16)
+            if empty_instruction_embeds is not None and empty_instruction_embeds.dtype == torch.bfloat16:
+                empty_instruction_embeds = empty_instruction_embeds.to(torch.float16)
+
         dtype = self.vae.dtype
 
         # 3. Prepare control image
@@ -3696,6 +3705,13 @@ class BooguImagePipeline(DiffusionPipeline, BooguImageLoraLoaderMixin):
         instruction_attention_mask,
         ref_image_hidden_states,
     ):
+        # MPS does not support bfloat16 matmul; ensure consistent dtypes
+        target_dtype = latents.dtype
+        if instruction_embeds.dtype != target_dtype:
+            instruction_embeds = instruction_embeds.to(target_dtype)
+        if instruction_attention_mask.dtype != target_dtype:
+            instruction_attention_mask = instruction_attention_mask.to(target_dtype)
+
         # broadcast to batch dimension in a way that's compatible with ONNX/Core ML
         timestep = t.expand(latents.shape[0]).to(latents.dtype)
 
