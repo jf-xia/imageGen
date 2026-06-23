@@ -1,7 +1,13 @@
 torch
 torchvision
-diffusers>=0.33.0,<0.39.0
-transformers
-accelerate>=0.21.0
+diffusers>=0.35.0,<0.39.0
+transformers>=4.57.0,<6
+accelerate>=1.0
 sentencepiece
 peft>=0.15.0
+einops
+scipy
+torchao>=0.15,<0.18
+omegaconf>=2.3,<3
+numpy>=1.26
+pillow>=10
