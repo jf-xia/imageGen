@@ -14,15 +14,15 @@ uv venv -p 3.11
 echo "Installing dependencies..."
 uv pip install -r requirements.txt
 
-echo "Cloning Boogu-Image repository..."
-if [ ! -d "Boogu-Image" ]; then
-    git clone https://github.com/boogu-project/Boogu-Image.git
-fi
-
-echo "Installing Boogu package..."
-uv pip install -e ./Boogu-Image
+echo "Installing boogu package from local boogu_pkg/..."
+uv pip install -e ./boogu_pkg
 
 echo ""
-echo "Setup complete! Run the demo with:"
-echo "  source .venv/bin/activate"
-echo "  python demo.py"
+echo "Setup complete!"
+echo ""
+echo "Next steps:"
+echo "  1. Download model weights (if not already present):"
+echo "     python download_model.py"
+echo "  2. Run the demo:"
+echo "     source .venv/bin/activate"
+echo "     python demo.py"
