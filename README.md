@@ -2,6 +2,19 @@
 
 A demo for running the [Boogu-Image-0.1-Turbo-fp8](https://huggingface.co/Boogu/Boogu-Image-0.1-Turbo-fp8) model locally on Mac with Apple Silicon GPU acceleration.
 
+## 使用方式
+
+```sh
+# 单张生成
+python demo.py --prompt "A cyberpunk city" --output city.png
+# 指定设备
+python demo.py --device mps --prompt "Mountain lake"
+# 批量生成
+python demo.py --batch "Cat" "Dog" "Bird" --output animal.png
+# 交互模式
+python demo.py --interactive
+```
+
 ## Prerequisites
 
 - macOS with Apple Silicon (M1/M2/M3/M4)
